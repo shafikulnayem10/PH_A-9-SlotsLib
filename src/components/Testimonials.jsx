@@ -120,17 +120,7 @@ export function Testimonials() {
       </div>
 
      
-      <style jsx global>{`
-        .swiper-pagination-bullet {
-          background: #cbd5e1 !important;
-          opacity: 1 !important;
-        }
-        .swiper-pagination-bullet-active {
-          background: #f97316 !important;
-          width: 20px !important;
-          border-radius: 4px !important;
-        }
-      `}</style>
+  
     </section>
   );
 }
