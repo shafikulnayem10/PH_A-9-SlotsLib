@@ -2,6 +2,7 @@
 
 import { Banner } from "@/components/Banner";
 import { FeaturedFacilities } from "@/components/FeaturedFacilities";
+import { Testimonials } from "@/components/Testimonials";
 
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
       <main>
         <Banner></Banner>
         <FeaturedFacilities></FeaturedFacilities>
+        <Testimonials></Testimonials>
       </main>
     </div>
   );
