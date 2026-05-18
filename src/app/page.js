@@ -1,6 +1,7 @@
 
 
-import { Navbar } from "@/components/Navbar";
+import { Banner } from "@/components/Banner";
+
 
 export default function HomePage() {
   return (
@@ -10,7 +11,7 @@ export default function HomePage() {
 
     
       <main>
-        <h1 className="text-4xl font-bold mb-4">Welcome to SlotsLib!</h1>
+        <Banner></Banner>
       </main>
     </div>
   );
