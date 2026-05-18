@@ -1,0 +1,63 @@
+[
+  {
+    "facilityName": "Arena One Turf",
+    "facilityType": "Football",
+    "imageUpload": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKfu2q2AtgrJYEBvOpUzwzq2jK70XppEz-c4pacL3Rhw&s&ec=121691717",
+    "location": "Sector 11, Uttara, Dhaka",
+    "pricePerHour": 1500,
+    "capacity": 14,
+    "availableTimeSlots": ["06:00 AM - 07:00 AM", "04:00 PM - 05:00 PM", "08:00 PM - 09:00 PM"],
+    "description": "Premium 7-a-side artificial turf with international standard lighting and comfortable dugout areas."
+  },
+  {
+    "facilityName": "Mirpur Badminton Club",
+    "facilityType": "Badminton",
+    "imageUpload": "https://img.freepik.com/free-photo/indoor-badminton-court-with-bright-white-lights_53876-64704.jpg?semt=ais_hybrid&w=740&q=80",
+    "location": "Sony Square Adjacent, Mirpur 2, Dhaka",
+    "pricePerHour": 600,
+    "capacity": 4,
+    "availableTimeSlots": ["10:00 AM - 11:00 AM", "02:00 PM - 03:00 PM", "07:00 PM - 08:00 PM"],
+    "description": "Indoor wooden floor court with professional net setups and high-velocity ventilation system."
+  },
+  {
+    "facilityName": "Velocity Cricket Cage",
+    "facilityType": "Cricket",
+    "imageUpload": "https://img.freepik.com/premium-photo/evening-sky-glowing-empty-cricket-stadium_944420-122682.jpg?semt=ais_hybrid&w=740&q=80",
+    "location": "Bashundhara R/A, Block C, Dhaka",
+    "pricePerHour": 1200,
+    "capacity": 10,
+    "availableTimeSlots": ["08:00 AM - 09:00 AM", "03:00 PM - 04:00 PM", "09:00 PM - 10:00 PM"],
+    "description": "Advanced indoor cricket net equipped with an automated bowling machine and speed trackers."
+  },
+  {
+    "facilityName": "Smash Tennis Court",
+    "facilityType": "Tennis",
+    "imageUpload": "https://media.istockphoto.com/id/1176735816/photo/blue-tennis-court-and-illuminated-indoor-arena-with-fans-upper-front-view.jpg?s=612x612&w=0&k=20&c=er_NtUH-Rv4Kj9mUPOa1C2EwM0rL3YwXwazshoXjvVA=",
+    "location": "Road 27, Dhanmondi, Dhaka",
+    "pricePerHour": 1800,
+    "capacity": 4,
+    "availableTimeSlots": ["07:00 AM - 08:00 AM", "04:00 PM - 05:00 PM"],
+    "description": "Standard clay court with floodlights for evening matches. Rackets and balls available for rent."
+  },
+  {
+    "facilityName": "The Hoop Station",
+    "facilityType": "Basketball",
+    "imageUpload": "https://media.istockphoto.com/id/2156925622/photo/empty-basketball-arena-with-perfectly-placed-markings-illuminated-by-powerful-lights-nd.jpg?s=612x612&w=0&k=20&c=KzLlSufCZ2SGMqHcfHTbQvckUHZrNBoqGhzQn8pIBDY=",
+    "location": "Banani, Block E, Dhaka",
+    "pricePerHour": 1000,
+    "capacity": 12,
+    "availableTimeSlots": ["09:00 AM - 10:00 AM", "01:00 PM - 02:00 PM", "06:00 PM - 07:00 PM"],
+    "description": "Full-court indoor basketball facility with fiberglass backboards and shock-absorbing flooring."
+  },
+  {
+    "facilityName": "Aqua Splash Pools",
+    "facilityType": "Swimming",
+    "imageUpload": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH6e8k0GgEkOrxy17OdDODeg5v0erzOmmEFGyrUBMTYA&s&ec=121691717",
+    "location": "Gulshan 2, Dhaka",
+    "pricePerHour": 2000,
+    "capacity": 20,
+    "availableTimeSlots": ["06:00 AM - 07:00 AM", "11:00 AM - 12:00 PM", "04:00 PM - 05:00 PM"],
+    "description": "Temperature-controlled Olympic size swimming pool with certified lifeguards always on duty."
+  }
+ 
+]

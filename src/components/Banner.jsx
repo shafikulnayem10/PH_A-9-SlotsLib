@@ -75,6 +75,7 @@ export function Banner() {
                 className="w-full h-full object-cover"
                 fill
                 priority
+                sizes="(max-w-7xl) 100vw, 50vw"
               />
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/50 z-20 shadow-lg">
                 <p className="text-xs font-bold text-orange-600 uppercase tracking-wider">Featured Ground</p>

@@ -1,6 +1,7 @@
 
 
 import { Banner } from "@/components/Banner";
+import { FeaturedFacilities } from "@/components/FeaturedFacilities";
 
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
     
       <main>
         <Banner></Banner>
+        <FeaturedFacilities></FeaturedFacilities>
       </main>
     </div>
   );
