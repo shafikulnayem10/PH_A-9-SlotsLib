@@ -2,12 +2,12 @@
   "name": "slotslib",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "npm install --legacy-peer-deps && next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.6.11",
     "@gravity-ui/components": "^4.19.1",
