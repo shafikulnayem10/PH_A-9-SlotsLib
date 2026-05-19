@@ -7,7 +7,7 @@ import { FacilityCard } from "./FacilityCard";
 
 async function getFeaturedFacilities() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/featured-facilities`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured-facilities`, {
       cache: "no-store", 
     });
 
