@@ -20,15 +20,16 @@ export default function BookingFormHandler({ facility, userEmail }) {
       return;
     }
 
-    const finalBookingPayload = {
-      facility_id: facility._id,
-      user_email: userEmail,
-      booking_date: bookingDate,
-      time_slot: selectedSlot,
-      hours: Number(hours),
-      total_price: Number(totalPrice),
-      status: "pending",
-    };
+  const finalBookingPayload = {
+  facility_id: facility._id,
+  facility_name: facility.facility_name, 
+  user_email: userEmail,
+  booking_date: bookingDate,
+  time_slot: selectedSlot,
+  hours: Number(hours),
+  total_price: Number(totalPrice),
+  status: "pending",
+};
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {

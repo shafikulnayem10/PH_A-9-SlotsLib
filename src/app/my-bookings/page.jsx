@@ -1,9 +1,110 @@
-import React from 'react'
+import { auth } from "@/src/lib/auth"; 
+import { headers } from "next/headers";
+import { Card } from "@heroui/react";
+import { Calendar, Clock, DollarSign, Activity } from "lucide-react";
+import CancelBookingButton from "@/components/CancelBookingButton"; 
 
-export default function MyBookingsPage() {
+
+async function getMyBookings(email) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings?email=${email}`, {
+      cache: "no-store", 
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching bookings on server:", error);
+    return [];
+  }
+}
+
+export default async function MyBookingsPage() {
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const userEmail = session?.user?.email || "";
+
+  if (!userEmail) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center bg-white text-black">
+        <p className="text-lg font-bold text-red-500">Please log in to view your bookings.</p>
+      </div>
+    );
+  }
+
+  
+  const bookings = await getMyBookings(userEmail);
+
   return (
-    <div>
-        <h1 className="text-4xl font-bold mb-4">My Bookings Page</h1>
+    <div className="min-h-screen bg-white text-black max-w-6xl mx-auto p-6 py-12">
+      
+    
+      <div className="mb-10">
+        <h1 className="text-3xl font-black text-black tracking-tight uppercase">
+          MY RESERVED <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">SLOTS</span>
+        </h1>
+        <p className="text-slate-600 text-sm font-medium mt-1">
+          Review status or cancel your pending slot reservations.
+        </p>
+      </div>
+
+      {bookings.length === 0 ? (
+        <Card className="p-12 text-center border border-dashed border-slate-200 rounded-3xl bg-slate-50/50 shadow-none">
+          <p className="text-xl font-extrabold text-slate-400 uppercase tracking-wide">No Bookings Found!</p>
+          <p className="text-slate-500 text-sm mt-1">You haven't booked any arenas yet.</p>
+        </Card>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {bookings.map((booking) => (
+            <Card 
+              key={booking._id} 
+              className="border border-slate-200 bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-orange-500/20 transition-all duration-300 flex flex-col justify-between gap-5 group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className={`text-[10px] font-black uppercase px-3 py-1 rounded-xl border ${
+                    booking.status === "pending" 
+                      ? "bg-amber-50 text-amber-600 border-amber-200/60" 
+                      : "bg-emerald-50 text-emerald-600 border-emerald-200/60"
+                  }`}>
+                    {booking.status}
+                  </span>
+                  <span className="text-xs text-slate-400 font-bold">ID: ...{booking._id.slice(-6)}</span>
+                </div>
+
+                <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-500 transition-colors line-clamp-1 uppercase">
+                  {booking.facility_name || "Sports Facility"}
+                </h3>
+
+                <hr className="border-slate-100" />
+
+                <div className="space-y-2 text-xs font-bold text-slate-600">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
+                    <span>Date: <span className="text-slate-900">{booking.booking_date}</span></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-slate-400 shrink-0" />
+                    <span>Slot: <span className="text-slate-900">{booking.time_slot}</span></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-slate-400 shrink-0" />
+                    <span>Duration: <span className="text-slate-900">{booking.hours} Hour(s)</span></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="w-4 h-4 text-slate-400 shrink-0" />
+                    <span>Paid Total: <span className="text-orange-600 font-extrabold">৳{booking.total_price}</span></span>
+                  </div>
+                </div>
+              </div>
+
+            
+              <CancelBookingButton bookingId={booking._id} />
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }

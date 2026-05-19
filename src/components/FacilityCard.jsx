@@ -54,7 +54,7 @@ export function FacilityCard({ facility }) {
         <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
           <div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Per Hour</p>
-            <p className="text-xl font-black text-slate-900">৳{price_per_hour}</p>
+            <p className="text-xl font-black text-slate-900">${price_per_hour}</p>
           </div>
 
           <Link href={`/facilities/${_id}`}>

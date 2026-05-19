@@ -1,4 +1,4 @@
-import { FacilityCard } from "@/components/FacilityCard"; 
+import { FacilityCard } from "@/components/FacilityCard";
 
 
 async function getFacilities() {

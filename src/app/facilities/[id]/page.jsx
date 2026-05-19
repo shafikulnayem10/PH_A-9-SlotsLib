@@ -1,8 +1,9 @@
-import { auth } from "@/src/lib/auth";
+// import { auth } from "@/src/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { MapPin, Users, Clock, DollarSign } from "lucide-react";
 import BookingFormHandler from "@/components/BookingFormHandler";
+import { auth } from "@/lib/auth";
 
 
 async function getSingleFacility(id) {
@@ -19,7 +20,7 @@ async function getSingleFacility(id) {
 }
 
 export default async function FacilityDetailsPage({ params }) {
-  const { id } = params;
+  const { id } =  await params;
   const facility = await getSingleFacility(id);
 
   const session = await auth.api.getSession({
