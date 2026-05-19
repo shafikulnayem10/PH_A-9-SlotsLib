@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "SlotsLib",
   description: "Book your premium sports facilities instantly.",
+  icons: {
+    icon: "/slotsliblogo.jpg",
+  },
 };
 
 export default function RootLayout({ children }) {
