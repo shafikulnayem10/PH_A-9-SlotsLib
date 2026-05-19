@@ -56,12 +56,18 @@ const AddFacilityPage = () => {
         return;
       }
 
+    
       const finalFacilityPayload = {
-        ...facilityData,
-        ownerEmail, 
-        availableSlots: slots, 
-        pricePerHour: Number(facilityData.pricePerHour),
+        facility_name: facilityData.facility_name,
+        facility_type: facilityData.facility_type,
+        imageUrl: facilityData.imageUrl,
+        location: facilityData.location,
+        price_per_hour: Number(facilityData.price_per_hour),
         capacity: Number(facilityData.capacity),
+        available_slots: slots, 
+        description: facilityData.description,
+        owner_email: ownerEmail, 
+        booking_count: 0 
       };
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`, {
@@ -87,7 +93,7 @@ const AddFacilityPage = () => {
   return (
     <div className="p-6 max-w-5xl mx-auto min-h-[85vh] flex flex-col justify-center bg-white text-black">
       
-      {/* Header Section */}
+    
       <div className="mb-6">
         <h1 className="text-3xl font-black text-black tracking-tight">
           ADD NEW <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">FACILITY</span>
@@ -103,19 +109,19 @@ const AddFacilityPage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            {/* Facility Name */}
+          
             <div>
-              <TextField name="facilityName" isRequired className="w-full">
+              <TextField name="facility_name" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Facility Name *</Label>
                 <Input placeholder="e.g. Red Turf Football Ground" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
                 <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
               </TextField>
             </div>
 
-            {/* Sport Type */}
+          
             <div>
               <Select
-                name="facilityType"
+                name="facility_type"
                 isRequired
                 className="w-full text-black"
                 placeholder="Select Sport Type"
@@ -137,7 +143,7 @@ const AddFacilityPage = () => {
               </Select>
             </div>
 
-            {/* Image URL */}
+         
             <div>
               <TextField name="imageUrl" type="url" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Image URL *</Label>
@@ -146,7 +152,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-            {/* Location */}
+          
             <div>
               <TextField name="location" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Location *</Label>
@@ -155,25 +161,25 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-            {/* Price Per Hour */}
+           
             <div>
-              <TextField name="pricePerHour" type="number" isRequired className="w-full">
+              <TextField name="price_per_hour" type="number" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Price Per Hour ($) *</Label>
-                <Input placeholder="50" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                <Input placeholder="1500" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
                 <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
               </TextField>
             </div>
 
-            {/* Capacity */}
+           
             <div>
               <TextField name="capacity" type="number" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Capacity (Players) *</Label>
-                <Input placeholder="22" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                <Input placeholder="14" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
                 <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
               </TextField>
             </div>
 
-            {/* Available Time Slots (Orange & Red Theme Managed) */}
+           
             <div className="md:col-span-2 flex flex-col gap-1">
               <Label className="text-sm font-bold text-black tracking-wide uppercase">Available Time Slots *</Label>
               <div className="flex gap-2 items-center mt-1">
@@ -192,7 +198,7 @@ const AddFacilityPage = () => {
                 </Button>
               </div>
 
-              {/* Slots Badges (শুধুমাত্র রেড/অরেঞ্জ ডিজাইন) */}
+              
               <div className="flex flex-wrap gap-2 mt-2">
                 {slots.map((slot, index) => (
                   <div 
@@ -212,7 +218,7 @@ const AddFacilityPage = () => {
               </div>
             </div>
 
-            {/* Description */}
+           
             <div className="md:col-span-2">
               <TextField name="description" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Description *</Label>
@@ -225,7 +231,7 @@ const AddFacilityPage = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
+         
           <Button
             type="submit"
             className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-extrabold h-12 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 mt-4"
