@@ -12,7 +12,6 @@ export default function DeleteFacilityButton({ facilityId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-
   const handleOpenModal = async () => {
     try {
       const { data: session } = await authClient.getSession();
@@ -29,12 +28,22 @@ export default function DeleteFacilityButton({ facilityId }) {
     }
   };
 
- 
   const handleDeleteConfirm = async () => {
     setIsDeleting(true);
     try {
+      const { data, error } = await authClient.token();
+
+      if (error || !data?.token) {
+        toast.error("Failed to retrieve authentication token!");
+        setIsDeleting(false);
+        return;
+      }
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${facilityId}`, {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${data.token}`,
+        },
       });
 
       if (res.ok) {
@@ -62,7 +71,6 @@ export default function DeleteFacilityButton({ facilityId }) {
         Delete
       </Button>
 
-      
       <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
         <Modal.Backdrop>
           <Modal.Container>

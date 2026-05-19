@@ -1,18 +1,22 @@
-// import { auth } from "@/src/lib/auth"; 
 import { headers } from "next/headers";
 import { Card, Button } from "@heroui/react";
-import { MapPin, Users, DollarSign, Edit, Settings } from "lucide-react";
+import { MapPin, Users, DollarSign, Edit } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteFacilityButton from "@/components/DeleteFacilityButton";
 import { auth } from "@/lib/auth";
 
-
-async function getMyFacilities(ownerEmail) {
+async function getMyFacilities(ownerEmail, token) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities?email=${ownerEmail}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities?email=${ownerEmail}`,
+      {
+        cache: "no-store",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (!res.ok) return [];
     return await res.json();
   } catch (error) {
@@ -22,31 +26,39 @@ async function getMyFacilities(ownerEmail) {
 }
 
 export default async function ManageFacilitiesPage() {
- 
+  const headersList = await headers();
+
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
   const ownerEmail = session?.user?.email || "";
 
   if (!ownerEmail) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-white text-black">
-        <p className="text-lg font-bold text-red-500">Please log in to manage your facilities.</p>
+        <p className="text-lg font-bold text-red-500">
+          Please log in to manage your facilities.
+        </p>
       </div>
     );
   }
 
-  
-  const facilities = await getMyFacilities(ownerEmail);
+  const tokenResponse = await auth.api.getToken({
+    headers: headersList,
+  });
+  const token = tokenResponse?.token;
+
+  const facilities = await getMyFacilities(ownerEmail, token);
 
   return (
     <div className="min-h-screen bg-white text-black max-w-6xl mx-auto p-6 py-12">
-      
-     
       <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black text-black tracking-tight uppercase">
-            MANAGE MY <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">FACILITIES</span>
+            MANAGE MY{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+              FACILITIES
+            </span>
           </h1>
           <p className="text-slate-600 text-sm font-medium mt-1">
             Update info or remove your listed sports arenas.
@@ -61,18 +73,20 @@ export default async function ManageFacilitiesPage() {
 
       {facilities.length === 0 ? (
         <Card className="p-12 text-center border border-dashed border-slate-200 rounded-3xl bg-slate-50/50 shadow-none">
-          <p className="text-xl font-extrabold text-slate-400 uppercase tracking-wide">No Facilities Listed!</p>
-          <p className="text-slate-500 text-sm mt-1">You haven't added any facility under your profile yet.</p>
+          <p className="text-xl font-extrabold text-slate-400 uppercase tracking-wide">
+            No Facilities Listed!
+          </p>
+          <p className="text-slate-500 text-sm mt-1">
+            You haven't added any facility under your profile yet.
+          </p>
         </Card>
       ) : (
-     
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {facilities.map((facility) => (
-            <Card 
-              key={facility._id} 
+            <Card
+              key={facility._id}
               className="border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
-             
               <div className="relative w-full aspect-[16/10] bg-slate-100 border-b border-slate-100">
                 <Image
                   src={facility.imageUrl || "/slotsliblogo.jpg"}
@@ -85,13 +99,12 @@ export default async function ManageFacilitiesPage() {
                 </div>
               </div>
 
-           
               <div className="p-5 flex-1 flex flex-col justify-between gap-4">
                 <div className="space-y-2">
                   <h3 className="text-lg font-black text-slate-900 group-hover:text-orange-500 transition-colors line-clamp-1 uppercase">
                     {facility.facility_name}
                   </h3>
-                  
+
                   <div className="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 pt-1">
                     <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-xl col-span-2">
                       <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
@@ -103,22 +116,24 @@ export default async function ManageFacilitiesPage() {
                     </div>
                     <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-2.5 py-1.5 rounded-xl">
                       <DollarSign className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                      <span className="text-orange-600 font-extrabold">৳{facility.price_per_hour}/h</span>
+                      <span className="text-orange-600 font-extrabold">
+                        ৳{facility.price_per_hour}/h
+                      </span>
                     </div>
                   </div>
                 </div>
 
-               
                 <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">
-                 
-                  <Link href={`/manage-facilities/edit/${facility._id}`} className="w-full">
+                  <Link
+                    href={`/manage-facilities/edit/${facility._id}`}
+                    className="w-full"
+                  >
                     <Button className="w-full bg-slate-900 hover:bg-black text-white font-extrabold h-10 rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 text-xs">
                       <Edit className="w-3.5 h-3.5" />
                       Update
                     </Button>
                   </Link>
 
-                 
                   <DeleteFacilityButton facilityId={facility._id} />
                 </div>
               </div>
@@ -128,4 +143,5 @@ export default async function ManageFacilitiesPage() {
       )}
     </div>
   );
-}
+} 
+

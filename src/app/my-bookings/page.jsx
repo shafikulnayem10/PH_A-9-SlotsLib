@@ -1,15 +1,16 @@
-
 import { headers } from "next/headers";
 import { Card } from "@heroui/react";
 import { Calendar, Clock, DollarSign, Activity } from "lucide-react";
-import CancelBookingButton from "@/components/CancelBookingButton"; 
+import CancelBookingButton from "@/components/CancelBookingButton";
 import { auth } from "@/lib/auth";
 
-
-async function getMyBookings(email) {
+async function getMyBookings(email, token) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings?email=${email}`, {
-      cache: "no-store", 
+      cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`, 
+      },
     });
     if (!res.ok) return [];
     return await res.json();
@@ -20,10 +21,17 @@ async function getMyBookings(email) {
 }
 
 export default async function MyBookingsPage() {
+  const headersList = await headers();
 
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
+
+ 
+  const { token } = await auth.api.getToken({
+    headers: headersList,
+  });
+
   const userEmail = session?.user?.email || "";
 
   if (!userEmail) {
@@ -34,8 +42,7 @@ export default async function MyBookingsPage() {
     );
   }
 
-  
-  const bookings = await getMyBookings(userEmail);
+  const bookings = await getMyBookings(userEmail, token); 
 
   return (
     <div className="min-h-screen bg-white text-black max-w-6xl mx-auto p-6 py-12">
@@ -71,7 +78,7 @@ export default async function MyBookingsPage() {
                   }`}>
                     {booking.status}
                   </span>
-                  <span className="text-xs text-slate-400 font-bold">ID: ...{booking._id.slice(-6)}</span>
+                  
                 </div>
 
                 <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-500 transition-colors line-clamp-1 uppercase">
@@ -101,7 +108,7 @@ export default async function MyBookingsPage() {
               </div>
 
             
-              <CancelBookingButton bookingId={booking._id} />
+              <CancelBookingButton bookingId={booking._id} token={token} />
             </Card>
           ))}
         </div>

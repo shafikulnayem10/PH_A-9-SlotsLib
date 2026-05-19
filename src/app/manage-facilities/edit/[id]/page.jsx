@@ -1,14 +1,15 @@
-
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import EditFacilityForm from "@/components/EditFacilityForm";
 import { auth } from "@/lib/auth";
 
-
-async function getFacilityDetails(id) {
+async function getFacilityDetails(id, token) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
       cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     if (!res.ok) return null;
     return await res.json();
@@ -19,12 +20,12 @@ async function getFacilityDetails(id) {
 }
 
 export default async function EditFacilityPage({ params }) {
-  
   const { id } = await params;
 
-  
+  const headersList = await headers();
+
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
   const currentUserEmail = session?.user?.email || "";
 
@@ -32,8 +33,12 @@ export default async function EditFacilityPage({ params }) {
     redirect("/login");
   }
 
- 
-  const facility = await getFacilityDetails(id);
+  const tokenResponse = await auth.api.getToken({
+    headers: headersList,
+  });
+  const token = tokenResponse?.token;
+
+  const facility = await getFacilityDetails(id, token);
 
   if (!facility) {
     return (
@@ -43,7 +48,6 @@ export default async function EditFacilityPage({ params }) {
     );
   }
 
-  
   if (facility.owner_email !== currentUserEmail) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-white text-black">
@@ -52,6 +56,5 @@ export default async function EditFacilityPage({ params }) {
     );
   }
 
-  
   return <EditFacilityForm facility={facility} />;
 }

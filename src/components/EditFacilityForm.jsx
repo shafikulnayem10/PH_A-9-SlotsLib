@@ -15,11 +15,11 @@ import {
 import toast from "react-hot-toast";
 import { FiPlus, FiX } from "react-icons/fi"; 
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function EditFacilityForm({ facility }) {
   const router = useRouter();
   
- 
   const [slots, setSlots] = useState(facility.available_slots || []);
   const [currentSlot, setCurrentSlot] = useState(""); 
   const [isUpdating, setIsUpdating] = useState(false);
@@ -55,22 +55,30 @@ export default function EditFacilityForm({ facility }) {
     }
 
     try {
+      const { data, error } = await authClient.token();
+
+      if (error || !data?.token) {
+        toast.error("Failed to retrieve authentication token!");
+        setIsUpdating(false);
+        return;
+      }
+
       const updatedFacilityPayload = {
         facility_name: facilityData.facility_name,
-        facility_type: facilityData.facility_type || facility.facility_type, 
+        facility_type: facilityData.facility_type || facility.facility_type,
         imageUrl: facilityData.imageUrl,
         location: facilityData.location,
         price_per_hour: Number(facilityData.price_per_hour),
         capacity: Number(facilityData.capacity),
-        available_slots: slots, 
+        available_slots: slots,
         description: facilityData.description,
       };
 
-      
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${facility._id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${data.token}`,
         },
         body: JSON.stringify(updatedFacilityPayload),
       });
@@ -107,7 +115,6 @@ export default function EditFacilityForm({ facility }) {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            
             <div>
               <TextField name="facility_name" isRequired defaultValue={facility.facility_name} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Facility Name *</Label>
@@ -116,7 +123,6 @@ export default function EditFacilityForm({ facility }) {
               </TextField>
             </div>
 
-           
             <div>
               <Select
                 name="facility_type"
@@ -141,7 +147,6 @@ export default function EditFacilityForm({ facility }) {
               </Select>
             </div>
 
-            
             <div>
               <TextField name="imageUrl" type="url" isRequired defaultValue={facility.imageUrl} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Image URL *</Label>
@@ -150,7 +155,6 @@ export default function EditFacilityForm({ facility }) {
               </TextField>
             </div>
 
-          
             <div>
               <TextField name="location" isRequired defaultValue={facility.location} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Location *</Label>
@@ -159,7 +163,6 @@ export default function EditFacilityForm({ facility }) {
               </TextField>
             </div>
 
-          
             <div>
               <TextField name="price_per_hour" type="number" isRequired defaultValue={facility.price_per_hour} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Price Per Hour ($) *</Label>
@@ -168,7 +171,6 @@ export default function EditFacilityForm({ facility }) {
               </TextField>
             </div>
 
-          
             <div>
               <TextField name="capacity" type="number" isRequired defaultValue={facility.capacity} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Capacity (Players) *</Label>
@@ -177,7 +179,6 @@ export default function EditFacilityForm({ facility }) {
               </TextField>
             </div>
 
-            
             <div className="md:col-span-2 flex flex-col gap-1">
               <Label className="text-sm font-bold text-black tracking-wide uppercase">Available Time Slots *</Label>
               <div className="flex gap-2 items-center mt-1">
@@ -215,7 +216,6 @@ export default function EditFacilityForm({ facility }) {
               </div>
             </div>
 
-           
             <div className="md:col-span-2">
               <TextField name="description" isRequired defaultValue={facility.description} className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Description *</Label>
@@ -228,7 +228,6 @@ export default function EditFacilityForm({ facility }) {
             </div>
           </div>
 
-         
           <Button
             type="submit"
             isLoading={isUpdating}

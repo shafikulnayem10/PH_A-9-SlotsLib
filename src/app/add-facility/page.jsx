@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   FieldError, 
   Input, 
@@ -19,6 +19,9 @@ import { FiPlus, FiX } from "react-icons/fi";
 const AddFacilityPage = () => {
   const [slots, setSlots] = useState([]);
   const [currentSlot, setCurrentSlot] = useState(""); 
+  
+ 
+  const { data: session, isPending } = authClient.useSession();
 
   const handleAddSlot = () => {
     const trimmed = currentSlot.trim();
@@ -47,16 +50,24 @@ const AddFacilityPage = () => {
       return;
     }
 
+    const ownerEmail = session?.user?.email || "";
+
+    if (!ownerEmail) {
+      toast.error("You must be logged in to add a facility!");
+      return;
+    }
+
     try {
-      const { data: session } = await authClient.getSession();
-      const ownerEmail = session?.user?.email || "";
+      
+const { data, error } = await authClient.token();
 
-      if (!ownerEmail) {
-        toast.error("You must be logged in to add a facility!");
-        return;
-      }
+if (error || !data?.token) {
+  toast.error("Failed to retrieve authentication token!");
+  return;
+}
 
-    
+const token = data.token;
+
       const finalFacilityPayload = {
         facility_name: facilityData.facility_name,
         facility_type: facilityData.facility_type,
@@ -74,6 +85,7 @@ const AddFacilityPage = () => {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(finalFacilityPayload),
       });
@@ -90,10 +102,17 @@ const AddFacilityPage = () => {
     }
   };
 
+  if (isPending) {
+    return (
+      <div className="min-h-[85vh] flex items-center justify-center bg-white text-black">
+        <p className="font-bold text-slate-500 animate-pulse">Checking authentication...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 max-w-5xl mx-auto min-h-[85vh] flex flex-col justify-center bg-white text-black">
       
-    
       <div className="mb-6">
         <h1 className="text-3xl font-black text-black tracking-tight">
           ADD NEW <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">FACILITY</span>
@@ -103,13 +122,12 @@ const AddFacilityPage = () => {
         </p>
       </div>
 
-      {/* Main Card */}
       <Card className="border border-slate-200 shadow-xl rounded-[24px] bg-white overflow-hidden">
         <form onSubmit={onSubmit} className="p-8 md:p-10 flex flex-col gap-6">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-          
+            {/* Facility Name */}
             <div>
               <TextField name="facility_name" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Facility Name *</Label>
@@ -118,7 +136,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-          
+            {/* Sport Type */}
             <div>
               <Select
                 name="facility_type"
@@ -143,7 +161,7 @@ const AddFacilityPage = () => {
               </Select>
             </div>
 
-         
+            {/* Image URL */}
             <div>
               <TextField name="imageUrl" type="url" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Image URL *</Label>
@@ -152,7 +170,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-          
+            {/* Location */}
             <div>
               <TextField name="location" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Location *</Label>
@@ -161,7 +179,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-           
+            {/* Price Per Hour */}
             <div>
               <TextField name="price_per_hour" type="number" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Price Per Hour ($) *</Label>
@@ -170,7 +188,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-           
+            {/* Capacity */}
             <div>
               <TextField name="capacity" type="number" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Capacity (Players) *</Label>
@@ -179,7 +197,7 @@ const AddFacilityPage = () => {
               </TextField>
             </div>
 
-           
+            {/* Time Slots */}
             <div className="md:col-span-2 flex flex-col gap-1">
               <Label className="text-sm font-bold text-black tracking-wide uppercase">Available Time Slots *</Label>
               <div className="flex gap-2 items-center mt-1">
@@ -198,7 +216,6 @@ const AddFacilityPage = () => {
                 </Button>
               </div>
 
-              
               <div className="flex flex-wrap gap-2 mt-2">
                 {slots.map((slot, index) => (
                   <div 
@@ -218,7 +235,7 @@ const AddFacilityPage = () => {
               </div>
             </div>
 
-           
+            {/* Description */}
             <div className="md:col-span-2">
               <TextField name="description" isRequired className="w-full">
                 <Label className="text-sm font-bold text-black tracking-wide uppercase">Description *</Label>
@@ -231,7 +248,6 @@ const AddFacilityPage = () => {
             </div>
           </div>
 
-         
           <Button
             type="submit"
             className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-extrabold h-12 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 mt-4"
