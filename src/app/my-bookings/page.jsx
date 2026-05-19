@@ -1,8 +1,9 @@
-import { auth } from "@/src/lib/auth"; 
+
 import { headers } from "next/headers";
 import { Card } from "@heroui/react";
 import { Calendar, Clock, DollarSign, Activity } from "lucide-react";
 import CancelBookingButton from "@/components/CancelBookingButton"; 
+import { auth } from "@/lib/auth";
 
 
 async function getMyBookings(email) {
@@ -94,7 +95,7 @@ export default async function MyBookingsPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <DollarSign className="w-4 h-4 text-slate-400 shrink-0" />
-                    <span>Paid Total: <span className="text-orange-600 font-extrabold">৳{booking.total_price}</span></span>
+                    <span>Paid Total: <span className="text-orange-600 font-extrabold">${booking.total_price}</span></span>
                   </div>
                 </div>
               </div>

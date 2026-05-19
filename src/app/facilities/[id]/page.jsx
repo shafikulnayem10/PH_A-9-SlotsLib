@@ -49,6 +49,7 @@ export default async function FacilityDetailsPage({ params }) {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 50vw" 
             />
             <div className="absolute top-4 left-4 bg-white text-orange-600 font-black text-xs px-4 py-2 rounded-xl uppercase shadow-md">
               {facility.facility_type}
