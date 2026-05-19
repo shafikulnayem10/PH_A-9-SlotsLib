@@ -1,7 +1,8 @@
-import { auth } from "@/src/lib/auth";
+
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import EditFacilityForm from "@/components/EditFacilityForm";
+import { auth } from "@/lib/auth";
 
 
 async function getFacilityDetails(id) {
