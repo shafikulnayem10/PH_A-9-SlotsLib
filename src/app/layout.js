@@ -25,7 +25,13 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col antialiased bg-white text-black">
         
        
-        <Toaster position="top-center" reverseOrder={false} />
+       <Toaster 
+  position="top-center" 
+  reverseOrder={false} 
+  toastOptions={{
+    duration: 4000,
+  }}
+/>
         
         <Navbar />
         

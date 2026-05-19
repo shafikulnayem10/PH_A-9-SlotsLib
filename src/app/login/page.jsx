@@ -102,7 +102,8 @@ export default function LoginPage() {
           >
             <Label className="text-sm font-extrabold text-slate-700">Password</Label>
             <Input 
-              placeholder="••••••••" 
+             type="password"
+             placeholder="..............."
               className="mt-1.5 border-slate-200 focus-within:border-orange-500"
             />
             <Description className="text-[10px] text-slate-400 font-medium mt-1">
