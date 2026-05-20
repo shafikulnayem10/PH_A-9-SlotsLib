@@ -38,12 +38,15 @@ export default function RegisterPage() {
 if (error) {
   if (error.status === 422) {
     toast.error("An account with this email already exists!");
+  } else if (error.status === 429) {
+    toast.error("Too many attempts. Please wait a moment and try again.");
   } else if (error.status === 400) {
     toast.error("Invalid information. Please check your details.");
   } else {
     toast.error(error.message || "Registration failed. Please try again.");
   }
-} else {
+}
+ else {
       toast.success("Registration successful! Please log in.");
       
       
