@@ -79,53 +79,51 @@ export default function BookingFormHandler({ facility, userEmail, token }) {
       <form onSubmit={handleBookingSubmit} className="px-8 py-7 space-y-5">
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase font-[family-name:var(--font-geist-sans)]">Facility</label>
+          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase">Facility</label>
           <div className="bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 shrink-0" />
             <span className="text-slate-800 font-bold text-sm">{facility.facility_name}</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase font-[family-name:var(--font-geist-sans)]">
-              Date <span className="text-red-500">*</span>
-            </label>
-            <Input
-              name="booking_date"
-              type="date"
-              isRequired
-              min={today}
-              className="border-slate-200 text-black focus-within:border-orange-500 rounded-2xl bg-slate-50 text-sm"
-            />
-          </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase">
+            Date <span className="text-red-500">*</span>
+          </label>
+          <Input
+            name="booking_date"
+            type="date"
+            isRequired
+            min={today}
+            className="border-slate-200 text-black focus-within:border-orange-500 rounded-2xl bg-slate-50 text-sm w-full"
+          />
+        </div>
 
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase font-[family-name:var(--font-geist-sans)]">
-              Duration (hrs) <span className="text-red-500">*</span>
-            </label>
-            <div className="flex items-center border border-slate-200 rounded-2xl bg-slate-50 overflow-hidden focus-within:border-orange-500 transition-colors">
-              <button
-                type="button"
-                onClick={() => setHours(h => Math.max(1, h - 1))}
-                className="px-3 py-3 text-slate-500 hover:text-orange-500 hover:bg-orange-50 transition-colors font-black text-lg leading-none"
-              >
-                −
-              </button>
-              <span className="flex-1 text-center font-black text-slate-900 text-sm">{hours}</span>
-              <button
-                type="button"
-                onClick={() => setHours(h => h + 1)}
-                className="px-3 py-3 text-slate-500 hover:text-orange-500 hover:bg-orange-50 transition-colors font-black text-lg leading-none"
-              >
-                +
-              </button>
-            </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase">
+            Duration (hrs) <span className="text-red-500">*</span>
+          </label>
+          <div className="flex items-center w-full border border-slate-200 rounded-2xl bg-slate-50 overflow-hidden transition-colors">
+            <button
+              type="button"
+              onClick={() => setHours(h => Math.max(1, h - 1))}
+              className="flex-1 py-3 text-slate-500 hover:text-orange-500 hover:bg-orange-50 transition-colors font-black text-lg leading-none"
+            >
+              −
+            </button>
+            <span className="flex-1 text-center font-black text-slate-900 text-sm border-x border-slate-200 py-3">{hours}</span>
+            <button
+              type="button"
+              onClick={() => setHours(h => h + 1)}
+              className="flex-1 py-3 text-slate-500 hover:text-orange-500 hover:bg-orange-50 transition-colors font-black text-lg leading-none"
+            >
+              +
+            </button>
           </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase font-[family-name:var(--font-geist-sans)]">
+          <label className="text-[10px] font-black text-slate-400 tracking-[0.15em] uppercase">
             Time Slot <span className="text-red-500">*</span>
           </label>
           <div className="flex flex-wrap gap-2">
@@ -134,7 +132,7 @@ export default function BookingFormHandler({ facility, userEmail, token }) {
                 key={idx}
                 type="button"
                 onClick={() => setSelectedSlot(slot)}
-                className={`px-4 py-2 rounded-xl text-xs font-black border transition-all duration-200 font-[family-name:var(--font-geist-sans)] ${
+                className={`px-4 py-2 rounded-xl text-xs font-black border transition-all duration-200 ${
                   selectedSlot === slot
                     ? "bg-gradient-to-r from-orange-500 to-red-500 text-white border-transparent shadow-md shadow-orange-200"
                     : "bg-slate-50 text-slate-600 border-slate-200 hover:border-orange-300 hover:text-orange-600 hover:bg-orange-50"
@@ -148,21 +146,19 @@ export default function BookingFormHandler({ facility, userEmail, token }) {
 
         <div className="rounded-2xl border border-orange-100 bg-gradient-to-r from-orange-50 to-red-50 p-5 flex items-center justify-between">
           <div>
-            <p className="text-[10px] font-black text-orange-700 tracking-[0.15em] uppercase font-[family-name:var(--font-geist-sans)]">Total Est. Price</p>
+            <p className="text-[10px] font-black text-orange-700 tracking-[0.15em] uppercase">Total Est. Price</p>
             <p className="text-xs text-slate-500 font-semibold mt-0.5">
               ${facility.price_per_hour} × {hours} Hour{hours > 1 ? "s" : ""}
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
-              ${totalPrice.toFixed(2)}
-            </p>
-          </div>
+          <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+            ${totalPrice}
+          </p>
         </div>
 
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black h-13 rounded-2xl shadow-lg shadow-orange-200 transition-all duration-300 text-sm tracking-wide uppercase font-[family-name:var(--font-geist-sans)]"
+          className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black h-12 rounded-2xl shadow-lg shadow-orange-200 transition-all duration-300 text-sm tracking-wide uppercase"
         >
           Confirm Booking 
         </Button>
