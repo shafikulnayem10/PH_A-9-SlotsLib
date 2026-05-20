@@ -79,7 +79,7 @@ export function Banner() {
               />
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/50 z-20 shadow-lg">
                 <p className="text-xs font-bold text-orange-600 uppercase tracking-wider">Featured Ground</p>
-                <p className="text-base font-extrabold text-slate-900 mt-0.5">Arena One Turf, Dhaka</p>
+                <p className="text-base font-extrabold text-slate-900 mt-0.5">Arena,Dhaka</p>
               </div>
             </div>
           </div>
