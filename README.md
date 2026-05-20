@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SlotsLib
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+SlotsLib is a full-stack sports facility booking management platform built with the MERN stack and Better Auth authentication. It allows users to explore available sports venues such as football turfs, badminton courts, cricket grounds, and tennis courts, and make instant bookings for specific dates and time slots. Facility owners can list, manage, update, and delete their own venues through a dedicated dashboard.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live URL
 
-Open [https://ph-a-9-slots-lib.vercel.app](https://ph-a-9-slots-lib.vercel.app) with your browser to see the result.
+[https://ph-a-9-slots-lib.vercel.app](https://ph-a-9-slots-lib.vercel.app)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Browse all sports facilities with search by name and filter by sport type
+- User authentication with email/password and Google login via Better Auth
+- JWT-based protected routes for private pages
+- Book a facility by selecting date, time slot, and duration with real-time price calculation
+- View and cancel personal bookings from the My Bookings dashboard
+- Add new sports facilities with name, type, location, price, capacity, time slots, and description
+- Manage owned facilities — update details or delete with confirmation modal
+- Deleting a facility automatically removes all related bookings
+- Facility owner email auto-filled on form submission
+- Responsive design for mobile, tablet, and desktop
+- Custom 404 Not Found page
+- Loading states during data fetching
+- Toast notifications for all success and error feedback
+- Active route highlighting in the navbar
 
-## Learn More
+## NPM Packages Used
 
-To learn more about Next.js, take a look at the following resources:
+### Dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Package | Purpose |
+|---|---|
+| `next` | React framework for server-side rendering and routing |
+| `react` | UI library |
+| `react-dom` | React DOM rendering |
+| `better-auth` | Authentication (email/password + Google OAuth) |
+| `@better-auth/mongo-adapter` | MongoDB adapter for Better Auth |
+| `mongodb` | MongoDB driver for database operations |
+| `@heroui/react` | UI component library (forms, cards, modals, buttons) |
+| `@heroui/styles` | Styling utilities for HeroUI |
+| `tailwindcss` | Utility-first CSS framework |
+| `lucide-react` | Icon library |
+| `react-icons` | Additional icon sets |
+| `react-hot-toast` | Toast notifications |
+| `jose-cjs` | JWT verification using JWKS for API protection |
+| `react-fast-marquee` | Scrolling marquee component |
+| `swiper` | Slider/carousel component |
+| `@gravity-ui/components` | Additional UI components |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Dev Dependencies
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Package | Purpose |
+|---|---|
+| `eslint` | Code linting |
+| `eslint-config-next` | ESLint configuration for Next.js |
+| `@tailwindcss/postcss` | PostCSS plugin for Tailwind CSS |
+| `babel-plugin-react-compiler` | React compiler Babel plugin |
