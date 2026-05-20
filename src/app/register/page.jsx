@@ -19,43 +19,34 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const image = formData.get("image");
-    const password = formData.get("password");
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const image = formData.get("image");
+  const password = formData.get("password");
 
-    
-    const { data, error } = await authClient.signUp.email({
-      email,
-      password,
-      name,
-      image,
-      dontRedirect: true,
-    });
+  const { data, error } = await authClient.signUp.email({
+    email,
+    password,
+    name,
+    image,
+    dontRedirect: true,
+    callbackURL: "/login",
+  });
 
-if (error) {
-  if (error.status === 422) {
-    toast.error("An account with this email already exists!");
-  } else if (error.status === 429) {
-    toast.error("Too many attempts. Please wait a moment and try again.");
-  } else if (error.status === 400) {
-    toast.error("Invalid information. Please check your details.");
-  } else {
-    toast.error(error.message || "Registration failed. Please try again.");
-  }
-}
- else {
-      toast.success("Registration successful! Please log in.");
-      
-      
-      setTimeout(async () => {
-        await authClient.signOut();
-        window.location.href = "/login";
-      }, 500);
+ if (error) {
+      toast.error(error.message || "Registration failed.");
     }
-  };
+    
+else {
+    toast.success("Registration successful! Please log in.");
+    setTimeout(async () => {
+      await authClient.signOut();
+      window.location.href = "/login";
+    }, 500);
+  }
+};
 
   const handleGoogleRegister = async () => {
     try {
@@ -167,6 +158,7 @@ if (error) {
           >
             Register Now
           </Button>
+         
         </Form>
 
       

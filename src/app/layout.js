@@ -29,25 +29,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
-      <body className="min-h-full flex flex-col antialiased bg-white text-black">
-        
-       
-       <Toaster 
-  position="top-center" 
-  reverseOrder={false} 
+     <body className="min-h-full flex flex-col antialiased bg-white text-black">
+  <Navbar />
+  <main className="grow">
+    {children}
+  </main>
+  <Footer />
+<Toaster 
+  position="top-center"
   toastOptions={{
     duration: 4000,
+    style: {
+      zIndex: 99999,
+    },
   }}
 />
-        
-        <Navbar />
-        
-        <main className="grow">
-          {children}
-        </main>
-        
-        <Footer />
-      </body>
+</body>
     </html>
   );
 }
