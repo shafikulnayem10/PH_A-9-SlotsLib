@@ -7,8 +7,6 @@ import {
   Input, 
   Label, 
   TextField, 
-  Select, 
-  ListBox, 
   TextArea, 
   Button, 
   Card 
@@ -68,7 +66,7 @@ const AddFacilityPage = () => {
 
       const finalFacilityPayload = {
         facility_name: facilityData.facility_name,
-        facility_type: facilityData.facility_type,
+        facility_type: facilityData.facility_type, 
         imageUrl: facilityData.imageUrl,
         location: facilityData.location,
         price_per_hour: Number(facilityData.price_per_hour),
@@ -108,23 +106,11 @@ const AddFacilityPage = () => {
     );
   }
 
-  
+ 
   const uiInputStyles = {
     input: "text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium",
     inputWrapper: [
       "bg-white dark:bg-slate-950",
-      "border border-slate-300 dark:border-slate-800",
-      "hover:border-slate-400 dark:hover:border-slate-700",
-      "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
-      "rounded-xl transition-all duration-200"
-    ].join(" ")
-  };
-
- 
-  const uiSelectStyles = {
-    value: "text-slate-900 dark:text-white font-medium",
-    trigger: [
-      "bg-white dark:bg-slate-955",
       "border border-slate-300 dark:border-slate-800",
       "hover:border-slate-400 dark:hover:border-slate-700",
       "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
@@ -161,26 +147,25 @@ const AddFacilityPage = () => {
                 </TextField>
               </div>
 
-              {/* Sport Type */}
-              <div>
-                <Select
+              {/* Sport Type*/}
+              <div className="flex flex-col">
+                <label htmlFor="facility_type" className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5">
+                  Sport Type *
+                </label>
+                <select
+                  id="facility_type"
                   name="facility_type"
-                  isRequired
-                  className="w-full"
-                  placeholder="Select Sport Type"
-                  classNames={uiSelectStyles}
+                  required
+                  defaultValue=""
+                  className="w-full h-[44px] px-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-all duration-200 cursor-pointer"
                 >
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Sport Type *</Label>
-                  <Select.Popover>
-                    <ListBox className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1">
-                      <ListBox.Item id="Football" textValue="Football" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Football</ListBox.Item>
-                      <ListBox.Item id="Cricket" textValue="Cricket" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Cricket</ListBox.Item>
-                      <ListBox.Item id="Badminton" textValue="Badminton" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Badminton</ListBox.Item>
-                      <ListBox.Item id="Basketball" textValue="Basketball" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Basketball</ListBox.Item>
-                      <ListBox.Item id="Tennis" textValue="Tennis" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Tennis</ListBox.Item>
-                    </ListBox>
-                  </Select.Popover>
-                </Select>
+                  <option value="" disabled hidden>Select Sport Type</option>
+                  <option value="Football" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Football</option>
+                  <option value="Cricket" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Cricket</option>
+                  <option value="Badminton" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Badminton</option>
+                  <option value="Basketball" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Basketball</option>
+                  <option value="Tennis" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Tennis</option>
+                </select>
               </div>
 
               {/* Image URL */}
