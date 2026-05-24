@@ -40,18 +40,24 @@ export default async function EditFacilityPage({ params }) {
 
   const facility = await getFacilityDetails(id, token);
 
+  
   if (!facility) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center bg-white text-black">
-        <p className="text-lg font-bold text-red-500">Facility not found!</p>
+      <div className="min-h-[85vh] flex items-center justify-center bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+        <p className="text-lg font-bold text-red-500 uppercase tracking-wide">
+          Facility not found!
+        </p>
       </div>
     );
   }
 
+  
   if (facility.owner_email !== currentUserEmail) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center bg-white text-black">
-        <p className="text-lg font-bold text-red-500">Unauthorized! Only the owner can update this facility.</p>
+      <div className="min-h-[85vh] flex items-center justify-center bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+        <p className="text-lg font-bold text-red-500 uppercase tracking-wide px-4 text-center">
+          Unauthorized! Only the owner can update this facility.
+        </p>
       </div>
     );
   }
