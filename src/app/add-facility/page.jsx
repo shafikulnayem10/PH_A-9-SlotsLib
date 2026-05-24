@@ -108,7 +108,7 @@ const AddFacilityPage = () => {
     );
   }
 
-  // ইনপুট ফিল্ডগুলোর বর্ডার, ব্যাকগ্রাউন্ড ও টেক্সট ডার্ক মোডে ডাইনামিক রাখার জন্য ক্লাসের ভেরিয়েবল
+  
   const inputBaseClass = "w-full mt-1.5 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-colors";
 
   return (
