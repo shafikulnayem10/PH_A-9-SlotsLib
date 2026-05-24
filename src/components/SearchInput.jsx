@@ -24,7 +24,7 @@ export default function SearchInput({ defaultValue }) {
       defaultValue={defaultValue}
       onChange={handleSearch}
       placeholder="Search facilities..."
-      className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-orange-500 font-medium text-slate-700 bg-white shadow-sm"
+      className="w-full px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm transition-colors duration-300"
     />
   );
 }
