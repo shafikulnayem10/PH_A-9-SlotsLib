@@ -96,11 +96,11 @@ export default function EditFacilityForm({ facility }) {
     }
   };
 
- 
+  
   const uiInputStyles = {
     input: "text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium",
     inputWrapper: [
-      "bg-white dark:bg-slate-955",
+      "bg-white dark:bg-slate-950",
       "border border-slate-300 dark:border-slate-800",
       "hover:border-slate-400 dark:hover:border-slate-700",
       "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
@@ -137,7 +137,7 @@ export default function EditFacilityForm({ facility }) {
                 </TextField>
               </div>
 
-              {/* Sport Type  */}
+        
               <div className="flex flex-col">
                 <label htmlFor="facility_type" className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5">
                   Sport Type *
@@ -147,9 +147,9 @@ export default function EditFacilityForm({ facility }) {
                   name="facility_type"
                   required
                   defaultValue={facility.facility_type || ""}
-                  className="w-full h-[44px] px-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-955 text-slate-900 dark:text-white font-medium focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-all duration-200 cursor-pointer"
+                  className="w-full h-[44px] px-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white font-medium focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-all duration-200 cursor-pointer"
                 >
-                  <option value="" disabled hidden>Select Sport Type</option>
+                  <option value="" disabled hidden className="text-slate-400">Select Sport Type</option>
                   <option value="Football" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Football</option>
                   <option value="Cricket" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Cricket</option>
                   <option value="Badminton" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Badminton</option>
