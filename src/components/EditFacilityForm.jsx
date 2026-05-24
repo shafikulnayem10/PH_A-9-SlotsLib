@@ -6,8 +6,6 @@ import {
   Input, 
   Label, 
   TextField, 
-  Select, 
-  ListBox, 
   TextArea, 
   Button, 
   Card 
@@ -98,145 +96,167 @@ export default function EditFacilityForm({ facility }) {
     }
   };
 
+ 
+  const uiInputStyles = {
+    input: "text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium",
+    inputWrapper: [
+      "bg-white dark:bg-slate-955",
+      "border border-slate-300 dark:border-slate-800",
+      "hover:border-slate-400 dark:hover:border-slate-700",
+      "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
+      "rounded-xl transition-all duration-200"
+    ].join(" ")
+  };
+
   return (
-    <div className="p-6 max-w-5xl mx-auto min-h-[85vh] flex flex-col justify-center bg-white text-black">
-      
-      <div className="mb-6">
-        <h1 className="text-3xl font-black text-black tracking-tight uppercase">
-          UPDATE <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">FACILITY</span>
-        </h1>
-        <p className="text-slate-600 text-sm font-medium mt-1">
-          Modify your sports venue information and available schedules.
-        </p>
-      </div>
+    <div className="w-full min-h-[85vh] bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+      <div className="p-6 max-w-5xl mx-auto flex flex-col justify-center">
+        
+        {/* Header Section */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
+            UPDATE <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">FACILITY</span>
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 text-sm font-medium mt-1">
+            Modify your sports venue information and available schedules.
+          </p>
+        </div>
 
-      <Card className="border border-slate-200 shadow-xl rounded-[24px] bg-white overflow-hidden">
-        <form onSubmit={onSubmit} className="p-8 md:p-10 flex flex-col gap-6">
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Form Card */}
+        <Card className="border border-slate-200 dark:border-slate-800 rounded-[24px] bg-white dark:bg-slate-900 overflow-hidden shadow-none transition-colors duration-300">
+          <form onSubmit={onSubmit} className="p-8 md:p-10 flex flex-col gap-6">
             
-            <div>
-              <TextField name="facility_name" isRequired defaultValue={facility.facility_name} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Facility Name *</Label>
-                <Input placeholder="e.g. Red Turf Football Ground" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl" />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Facility Name */}
+              <div>
+                <TextField name="facility_name" isRequired defaultValue={facility.facility_name} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Facility Name *</Label>
+                  <Input placeholder="e.g. Red Turf Football Ground" classNames={uiInputStyles} />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
+              </div>
 
-            <div>
-              <Select
-                name="facility_type"
-                className="w-full text-black"
-                defaultSelectedKeys={[facility.facility_type]}
-                placeholder="Select Sport Type"
-              >
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Sport Type *</Label>
-                <Select.Trigger className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl">
-                  <Select.Value />
-                  <Select.Indicator />
-                </Select.Trigger>
-                <Select.Popover>
-                  <ListBox className="bg-white text-black">
-                    <ListBox.Item id="Football" textValue="Football">Football</ListBox.Item>
-                    <ListBox.Item id="Cricket" textValue="Cricket">Cricket</ListBox.Item>
-                    <ListBox.Item id="Badminton" textValue="Badminton">Badminton</ListBox.Item>
-                    <ListBox.Item id="Basketball" textValue="Basketball">Basketball</ListBox.Item>
-                    <ListBox.Item id="Tennis" textValue="Tennis">Tennis</ListBox.Item>
-                  </ListBox>
-                </Select.Popover>
-              </Select>
-            </div>
-
-            <div>
-              <TextField name="imageUrl" type="url" isRequired defaultValue={facility.imageUrl} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Image URL *</Label>
-                <Input placeholder="https://example.com/image.jpg" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl" />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
-
-            <div>
-              <TextField name="location" isRequired defaultValue={facility.location} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Location *</Label>
-                <Input placeholder="e.g. Gulshan, Dhaka" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl" />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
-
-            <div>
-              <TextField name="price_per_hour" type="number" isRequired defaultValue={facility.price_per_hour} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Price Per Hour ($) *</Label>
-                <Input placeholder="1500" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl" />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
-
-            <div>
-              <TextField name="capacity" type="number" isRequired defaultValue={facility.capacity} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Capacity (Players) *</Label>
-                <Input placeholder="14" className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl" />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
-
-            <div className="md:col-span-2 flex flex-col gap-1">
-              <Label className="text-sm font-bold text-black tracking-wide uppercase">Available Time Slots *</Label>
-              <div className="flex gap-2 items-center mt-1">
-                <Input 
-                  value={currentSlot}
-                  onChange={(e) => setCurrentSlot(e.target.value)}
-                  placeholder="e.g. 08:00 AM - 09:00 AM" 
-                  className="border-slate-300 text-black focus-within:border-orange-500 flex-1 rounded-xl"
-                />
-                <Button 
-                  type="button"
-                  onClick={handleAddSlot}
-                  className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-12 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md"
+              {/* Sport Type  */}
+              <div className="flex flex-col">
+                <label htmlFor="facility_type" className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5">
+                  Sport Type *
+                </label>
+                <select
+                  id="facility_type"
+                  name="facility_type"
+                  required
+                  defaultValue={facility.facility_type || ""}
+                  className="w-full h-[44px] px-4 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-955 text-slate-900 dark:text-white font-medium focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-all duration-200 cursor-pointer"
                 >
-                  <FiPlus className="text-xl" />
-                </Button>
+                  <option value="" disabled hidden>Select Sport Type</option>
+                  <option value="Football" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Football</option>
+                  <option value="Cricket" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Cricket</option>
+                  <option value="Badminton" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Badminton</option>
+                  <option value="Basketball" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Basketball</option>
+                  <option value="Tennis" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Tennis</option>
+                </select>
               </div>
 
-              <div className="flex flex-wrap gap-2 mt-2">
-                {slots.map((slot, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-center gap-1.5 bg-orange-50 border border-orange-200 px-3 py-1.5 rounded-lg text-orange-700 font-bold text-xs"
+              {/* Image URL */}
+              <div>
+                <TextField name="imageUrl" type="url" isRequired defaultValue={facility.imageUrl} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Image URL *</Label>
+                  <Input placeholder="https://example.com/image.jpg" classNames={uiInputStyles} />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
+              </div>
+
+              {/* Location */}
+              <div>
+                <TextField name="location" isRequired defaultValue={facility.location} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Location *</Label>
+                  <Input placeholder="e.g. Gulshan, Dhaka" classNames={uiInputStyles} />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
+              </div>
+
+              {/* Price Per Hour */}
+              <div>
+                <TextField name="price_per_hour" type="number" isRequired defaultValue={facility.price_per_hour} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Price Per Hour ($) *</Label>
+                  <Input placeholder="1500" classNames={uiInputStyles} />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
+              </div>
+
+              {/* Capacity */}
+              <div>
+                <TextField name="capacity" type="number" isRequired defaultValue={facility.capacity} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Capacity (Players) *</Label>
+                  <Input placeholder="14" classNames={uiInputStyles} />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
+              </div>
+
+              {/* Time Slots */}
+              <div className="md:col-span-2 flex flex-col gap-1">
+                <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Available Time Slots *</Label>
+                <div className="flex gap-2 items-center">
+                  <Input 
+                    value={currentSlot}
+                    onChange={(e) => setCurrentSlot(e.target.value)}
+                    placeholder="e.g. 08:00 AM - 09:00 AM" 
+                    classNames={uiInputStyles}
+                  />
+                  <Button 
+                    type="button"
+                    onClick={handleAddSlot}
+                    className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-10 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md shadow-orange-500/10"
                   >
-                    <span>{slot}</span>
-                    <button 
-                      type="button" 
-                      onClick={() => handleRemoveSlot(slot)}
-                      className="text-red-500 hover:text-red-700 focus:outline-none bg-orange-100 hover:bg-orange-200 p-0.5 rounded transition-colors"
+                    <FiPlus className="text-xl" />
+                  </Button>
+                </div>
+
+                {/* Added Slots Badges */}
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {slots.map((slot, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-center gap-1.5 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/50 px-3 py-1.5 rounded-lg text-orange-700 dark:text-orange-400 font-bold text-xs"
                     >
-                      <FiX size={14} />
-                    </button>
-                  </div>
-                ))}
+                      <span>{slot}</span>
+                      <button 
+                        type="button" 
+                        onClick={() => handleRemoveSlot(slot)}
+                        className="text-red-500 hover:text-red-700 focus:outline-none bg-orange-100 dark:bg-orange-900/60 hover:bg-orange-200 dark:hover:bg-orange-800 p-0.5 rounded transition-colors"
+                      >
+                        <FiX size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="md:col-span-2">
+                <TextField name="description" isRequired defaultValue={facility.description} className="w-full">
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Description *</Label>
+                  <TextArea
+                    placeholder="Describe your facility..."
+                    classNames={uiInputStyles}
+                  />
+                  <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
+                </TextField>
               </div>
             </div>
 
-            <div className="md:col-span-2">
-              <TextField name="description" isRequired defaultValue={facility.description} className="w-full">
-                <Label className="text-sm font-bold text-black tracking-wide uppercase">Description *</Label>
-                <TextArea
-                  placeholder="Describe your facility..."
-                  className="mt-1.5 border-slate-300 text-black focus-within:border-orange-500 rounded-xl"
-                />
-                <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
-              </TextField>
-            </div>
-          </div>
-
-          <Button
-            type="submit"
-            isLoading={isUpdating}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-extrabold h-12 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 mt-4 uppercase text-xs tracking-wider"
-          >
-            {isUpdating ? "Updating Info..." : "Save Changes"}
-          </Button>
-        </form>
-      </Card>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              isLoading={isUpdating}
+              className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-extrabold h-12 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 mt-4 uppercase text-xs tracking-wider"
+            >
+              {isUpdating ? "Updating Info..." : "Save Changes"}
+            </Button>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 }
