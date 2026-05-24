@@ -51,7 +51,7 @@ export default async function ManageFacilitiesPage() {
   const facilities = await getMyFacilities(ownerEmail, token);
 
   return (
-    <div className="w-full min-h-screen bg-white dark:bg-slate-955 text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="w-full min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="max-w-6xl mx-auto p-6 py-12">
         
         {/* Header Section */}
@@ -76,7 +76,7 @@ export default async function ManageFacilitiesPage() {
 
         {/* Empty State */}
         {facilities.length === 0 ? (
-          <Card className="p-12 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50/50 dark:bg-slate-900/30 shadow-none">
+          <Card className="p-12 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50 dark:bg-slate-900 shadow-none">
             <p className="text-xl font-extrabold text-slate-400 dark:text-slate-600 uppercase tracking-wide">
               No Facilities Listed!
             </p>
@@ -90,7 +90,7 @@ export default async function ManageFacilitiesPage() {
             {facilities.map((facility) => (
               <Card
                 key={facility._id}
-                className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-none hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group"
+                className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm dark:shadow-none hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Image Section */}
                 <div className="relative w-full aspect-[16/10] bg-slate-100 dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
@@ -100,21 +100,21 @@ export default async function ManageFacilitiesPage() {
                     fill
                     className="object-cover"
                   />
-                  {/* Tag/Badge */}
-                  <div className="absolute top-3 left-3 bg-white dark:bg-slate-950 text-orange-600 dark:text-orange-400 font-black text-[10px] px-3 py-1.5 rounded-xl uppercase shadow-md border border-orange-100 dark:border-orange-900/60">
+                  {/* Sport Type Badge */}
+                  <div className="absolute top-3 left-3 bg-white dark:bg-slate-800 text-orange-600 dark:text-orange-400 font-black text-[10px] px-3 py-1.5 rounded-xl uppercase shadow-md border border-orange-100 dark:border-orange-950/60">
                     {facility.facility_type}
                   </div>
                 </div>
 
                 {/* Details Section */}
-                <div className="p-5 flex-1 flex flex-col justify-between gap-4">
+                <div className="p-5 flex-1 flex flex-col justify-between gap-4 bg-white dark:bg-slate-900">
                   <div className="space-y-2">
                     <h3 className="text-lg font-black text-slate-900 dark:text-white group-hover:text-orange-500 dark:group-hover:text-orange-500 transition-colors line-clamp-1 uppercase">
                       {facility.facility_name}
                     </h3>
 
-                    {/* Meta details boxes  */}
-                    <div className="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300 pt-1">
+                    {/* Info Blocks Grid */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px] font-bold pt-1">
                       {/* Location Box */}
                       <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 px-2.5 py-1.5 rounded-xl col-span-2">
                         <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
