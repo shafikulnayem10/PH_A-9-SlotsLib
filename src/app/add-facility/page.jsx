@@ -108,6 +108,9 @@ const AddFacilityPage = () => {
     );
   }
 
+  // ইনপুট ফিল্ডগুলোর বর্ডার, ব্যাকগ্রাউন্ড ও টেক্সট ডার্ক মোডে ডাইনামিক রাখার জন্য ক্লাসের ভেরিয়েবল
+  const inputBaseClass = "w-full mt-1.5 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-colors";
+
   return (
     <div className="w-full min-h-[85vh] bg-white dark:bg-slate-955 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="p-6 max-w-5xl mx-auto flex flex-col justify-center">
@@ -123,7 +126,7 @@ const AddFacilityPage = () => {
         </div>
 
         {/* Form Card */}
-        <Card className="border border-slate-200 dark:border-slate-800 shadow-xl rounded-[24px] bg-white dark:bg-slate-900 overflow-hidden shadow-none">
+        <Card className="border border-slate-200 dark:border-slate-800 shadow-xl rounded-[24px] bg-white dark:bg-slate-900 overflow-hidden shadow-none transition-colors duration-300">
           <form onSubmit={onSubmit} className="p-8 md:p-10 flex flex-col gap-6">
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -132,7 +135,7 @@ const AddFacilityPage = () => {
               <div>
                 <TextField name="facility_name" isRequired className="w-full">
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Facility Name *</Label>
-                  <Input placeholder="e.g. Red Turf Football Ground" className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                  <Input placeholder="e.g. Red Turf Football Ground" className={inputBaseClass} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -146,17 +149,17 @@ const AddFacilityPage = () => {
                   placeholder="Select Sport Type"
                 >
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Sport Type *</Label>
-                  <Select.Trigger className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500">
+                  <Select.Trigger className="mt-1.5 px-4 py-2.5 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-955 text-slate-900 dark:text-white rounded-xl focus-within:border-orange-500 dark:focus-within:border-orange-500 flex justify-between items-center transition-colors">
                     <Select.Value />
                     <Select.Indicator />
                   </Select.Trigger>
                   <Select.Popover>
-                    <ListBox className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border dark:border-slate-800 rounded-xl shadow-lg">
-                      <ListBox.Item id="Football" textValue="Football" className="hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40">Football</ListBox.Item>
-                      <ListBox.Item id="Cricket" textValue="Cricket" className="hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40">Cricket</ListBox.Item>
-                      <ListBox.Item id="Badminton" textValue="Badminton" className="hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40">Badminton</ListBox.Item>
-                      <ListBox.Item id="Basketball" textValue="Basketball" className="hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40">Basketball</ListBox.Item>
-                      <ListBox.Item id="Tennis" textValue="Tennis" className="hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40">Tennis</ListBox.Item>
+                    <ListBox className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1">
+                      <ListBox.Item id="Football" textValue="Football" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Football</ListBox.Item>
+                      <ListBox.Item id="Cricket" textValue="Cricket" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Cricket</ListBox.Item>
+                      <ListBox.Item id="Badminton" textValue="Badminton" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Badminton</ListBox.Item>
+                      <ListBox.Item id="Basketball" textValue="Basketball" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Basketball</ListBox.Item>
+                      <ListBox.Item id="Tennis" textValue="Tennis" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Tennis</ListBox.Item>
                     </ListBox>
                   </Select.Popover>
                 </Select>
@@ -166,7 +169,7 @@ const AddFacilityPage = () => {
               <div>
                 <TextField name="imageUrl" type="url" isRequired className="w-full">
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Image URL *</Label>
-                  <Input placeholder="https://example.com/image.jpg" className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                  <Input placeholder="https://example.com/image.jpg" className={inputBaseClass} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -175,7 +178,7 @@ const AddFacilityPage = () => {
               <div>
                 <TextField name="location" isRequired className="w-full">
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Location *</Label>
-                  <Input placeholder="e.g. Gulshan, Dhaka" className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                  <Input placeholder="e.g. Gulshan, Dhaka" className={inputBaseClass} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -184,7 +187,7 @@ const AddFacilityPage = () => {
               <div>
                 <TextField name="price_per_hour" type="number" isRequired className="w-full">
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Price Per Hour ($) *</Label>
-                  <Input placeholder="1500" className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                  <Input placeholder="1500" className={inputBaseClass} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -193,7 +196,7 @@ const AddFacilityPage = () => {
               <div>
                 <TextField name="capacity" type="number" isRequired className="w-full">
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Capacity (Players) *</Label>
-                  <Input placeholder="14" className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500" />
+                  <Input placeholder="14" className={inputBaseClass} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -206,12 +209,12 @@ const AddFacilityPage = () => {
                     value={currentSlot}
                     onChange={(e) => setCurrentSlot(e.target.value)}
                     placeholder="e.g. 08:00 AM - 09:00 AM" 
-                    className="border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 flex-1 rounded-xl focus-within:ring-1 focus-within:ring-orange-500"
+                    className={`${inputBaseClass} flex-1 mt-0`}
                   />
                   <Button 
                     type="button"
                     onClick={handleAddSlot}
-                    className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-12 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md shadow-orange-500/10"
+                    className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-11 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md shadow-orange-500/10"
                   >
                     <FiPlus className="text-xl" />
                   </Button>
@@ -243,7 +246,7 @@ const AddFacilityPage = () => {
                   <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Description *</Label>
                   <TextArea
                     placeholder="Describe your facility..."
-                    className="mt-1.5 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white bg-transparent focus-within:border-orange-500 dark:focus-within:border-orange-500 rounded-xl focus-within:ring-1 focus-within:ring-orange-500"
+                    className={inputBaseClass}
                   />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
