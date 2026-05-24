@@ -1,17 +1,24 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
 
 
+@variant dark (&:where(.dark, .dark *));
 
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
 
-
-
-
+.dark {
+  --background: #0f172a;
+  --foreground: #ffffff;
+}
 
 .swiper-pagination-bullet {
   background: #cbd5e1 !important;
   opacity: 1 !important;
 }
+
 .swiper-pagination-bullet-active {
   background: #f97316 !important;
   width: 20px !important;
