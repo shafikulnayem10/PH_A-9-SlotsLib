@@ -47,32 +47,45 @@ export default function LoginPage() {
         provider: "google",
         callbackURL: "/", 
       });
-    toast.success("Welcome!");
+      toast.success("Welcome!");
     } catch (err) {
       toast.error("Google sign-in failed.");
     }
   };
 
+  
+  const uiInputStyles = {
+    input: "text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium",
+    inputWrapper: [
+      "bg-white dark:bg-slate-950",
+      "border border-slate-200 dark:border-slate-800",
+      "hover:border-slate-300 dark:hover:border-slate-700",
+      "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
+      "rounded-xl transition-all duration-200"
+    ].join(" ")
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-[80vh] bg-slate-50/50 px-4">
+    <div className="flex justify-center items-center min-h-[80vh] bg-slate-50/50 dark:bg-slate-950 px-4 text-slate-900 dark:text-white transition-colors duration-300">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <Card className="border border-slate-100 shadow-xl w-full max-w-md py-10 px-8 flex flex-col gap-6 rounded-3xl bg-white">
+      {/* Login Card Container */}
+      <Card className="border border-slate-100 dark:border-slate-800 shadow-xl w-full max-w-md py-10 px-8 flex flex-col gap-6 rounded-3xl bg-white dark:bg-slate-900 transition-colors duration-300 shadow-none">
         
-      
+        {/* Title */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             WEL<span className="text-orange-500">COME</span>
           </h1>
-          <p className="text-slate-500 text-sm font-medium">
+          <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
             Please enter your details to login to SlotsLib.
           </p>
         </div>
 
-      
+        {/* Credentials Login Form */}
         <Form className="flex flex-col gap-5" onSubmit={onSubmit}>
           
-         
+          {/* Email Input */}
           <TextField
             isRequired
             name="email"
@@ -85,62 +98,63 @@ export default function LoginPage() {
               return null;
             }}
           >
-            <Label className="text-sm font-extrabold text-slate-700">Email Address</Label>
+            <Label className="text-sm font-extrabold text-slate-700 dark:text-slate-200 mb-1 block">Email Address</Label>
             <Input 
               placeholder="name@example.com" 
-              className="mt-1.5 border-slate-200 focus-within:border-orange-500"
+              classNames={uiInputStyles}
             />
             <FieldError className="text-xs text-red-500 mt-1 font-semibold" />
           </TextField>
 
-          
+          {/* Password Input */}
           <TextField
             isRequired
             name="password"
             type="password"
             className="w-full"
           >
-            <Label className="text-sm font-extrabold text-slate-700">Password</Label>
+            <Label className="text-sm font-extrabold text-slate-700 dark:text-slate-200 mb-1 block">Password</Label>
             <Input 
-             type="password"
-             placeholder="..............."
-              className="mt-1.5 border-slate-200 focus-within:border-orange-500"
+              type="password"
+              placeholder="..............."
+              classNames={uiInputStyles}
             />
-            <Description className="text-[10px] text-slate-400 font-medium mt-1">
+            <Description className="text-[10px] text-slate-400 dark:text-slate-500 font-medium mt-1">
               Must be at least 8 characters.
             </Description>
             <FieldError className="text-xs text-red-500 mt-1 font-semibold" />
           </TextField>
 
-         
+          {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold h-12 rounded-xl shadow-md shadow-orange-500/10 transition-all duration-300"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold h-12 rounded-xl shadow-md shadow-orange-500/10 transition-all duration-300 text-sm"
           >
             Login
           </Button>
         </Form>
 
+        {/* Divider Section */}
         <div className="flex items-center gap-4 py-1">
-          <div className="h-px bg-slate-200 flex-1"></div>
-          <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Or</span>
-          <div className="h-px bg-slate-200 flex-1"></div>
+          <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
+          <span className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Or</span>
+          <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
         </div>
 
-       
+        {/* Social Authentication Button */}
         <Button
           onClick={handleGoogleLogIn}
           variant="bordered"
-          className="w-full border-orange-500 text-orange-500 hover:bg-orange-50 font-extrabold h-12 rounded-xl transition-all duration-300"
+          className="w-full border-orange-500 text-orange-500 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/30 font-extrabold h-12 rounded-xl transition-all duration-300 text-sm"
         >
-          <GrGoogle className="text-orange-500 text-lg" />
+          <GrGoogle className="text-orange-500 dark:text-orange-400 text-lg" />
           Continue with Google
         </Button>
 
-       
-        <p className="text-center text-sm text-slate-600 font-medium">
+        {/* Footer Link */}
+        <p className="text-center text-sm text-slate-600 dark:text-slate-400 font-medium">
           New to SlotsLib?{" "}
-          <Link href="/register" className="text-orange-500 font-extrabold hover:text-orange-600 hover:underline transition-colors">
+          <Link href="/register" className="text-orange-500 font-extrabold hover:text-orange-600 dark:hover:text-orange-400 hover:underline transition-colors">
             Create an account
           </Link>
         </p>
