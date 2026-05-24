@@ -109,10 +109,31 @@ const AddFacilityPage = () => {
   }
 
   
-  const inputBaseClass = "w-full mt-1.5 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 transition-colors";
+  const uiInputStyles = {
+    input: "text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium",
+    inputWrapper: [
+      "bg-white dark:bg-slate-950",
+      "border border-slate-300 dark:border-slate-800",
+      "hover:border-slate-400 dark:hover:border-slate-700",
+      "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
+      "rounded-xl transition-all duration-200"
+    ].join(" ")
+  };
+
+ 
+  const uiSelectStyles = {
+    value: "text-slate-900 dark:text-white font-medium",
+    trigger: [
+      "bg-white dark:bg-slate-955",
+      "border border-slate-300 dark:border-slate-800",
+      "hover:border-slate-400 dark:hover:border-slate-700",
+      "focus-within:!border-orange-500 dark:focus-within:!border-orange-500",
+      "rounded-xl transition-all duration-200"
+    ].join(" ")
+  };
 
   return (
-    <div className="w-full min-h-[85vh] bg-white dark:bg-slate-955 text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="w-full min-h-[85vh] bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="p-6 max-w-5xl mx-auto flex flex-col justify-center">
         
         {/* Header Section */}
@@ -126,7 +147,7 @@ const AddFacilityPage = () => {
         </div>
 
         {/* Form Card */}
-        <Card className="border border-slate-200 dark:border-slate-800 shadow-xl rounded-[24px] bg-white dark:bg-slate-900 overflow-hidden shadow-none transition-colors duration-300">
+        <Card className="border border-slate-200 dark:border-slate-800 rounded-[24px] bg-white dark:bg-slate-900 overflow-hidden shadow-none transition-colors duration-300">
           <form onSubmit={onSubmit} className="p-8 md:p-10 flex flex-col gap-6">
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -134,8 +155,8 @@ const AddFacilityPage = () => {
               {/* Facility Name */}
               <div>
                 <TextField name="facility_name" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Facility Name *</Label>
-                  <Input placeholder="e.g. Red Turf Football Ground" className={inputBaseClass} />
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Facility Name *</Label>
+                  <Input placeholder="e.g. Red Turf Football Ground" classNames={uiInputStyles} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -145,14 +166,11 @@ const AddFacilityPage = () => {
                 <Select
                   name="facility_type"
                   isRequired
-                  className="w-full text-slate-900 dark:text-white"
+                  className="w-full"
                   placeholder="Select Sport Type"
+                  classNames={uiSelectStyles}
                 >
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Sport Type *</Label>
-                  <Select.Trigger className="mt-1.5 px-4 py-2.5 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-955 text-slate-900 dark:text-white rounded-xl focus-within:border-orange-500 dark:focus-within:border-orange-500 flex justify-between items-center transition-colors">
-                    <Select.Value />
-                    <Select.Indicator />
-                  </Select.Trigger>
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Sport Type *</Label>
                   <Select.Popover>
                     <ListBox className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1">
                       <ListBox.Item id="Football" textValue="Football" className="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-950/40 focus:bg-orange-50 dark:focus:bg-orange-950/40 cursor-pointer">Football</ListBox.Item>
@@ -168,8 +186,8 @@ const AddFacilityPage = () => {
               {/* Image URL */}
               <div>
                 <TextField name="imageUrl" type="url" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Image URL *</Label>
-                  <Input placeholder="https://example.com/image.jpg" className={inputBaseClass} />
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Image URL *</Label>
+                  <Input placeholder="https://example.com/image.jpg" classNames={uiInputStyles} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -177,8 +195,8 @@ const AddFacilityPage = () => {
               {/* Location */}
               <div>
                 <TextField name="location" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Location *</Label>
-                  <Input placeholder="e.g. Gulshan, Dhaka" className={inputBaseClass} />
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Location *</Label>
+                  <Input placeholder="e.g. Gulshan, Dhaka" classNames={uiInputStyles} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -186,8 +204,8 @@ const AddFacilityPage = () => {
               {/* Price Per Hour */}
               <div>
                 <TextField name="price_per_hour" type="number" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Price Per Hour ($) *</Label>
-                  <Input placeholder="1500" className={inputBaseClass} />
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Price Per Hour ($) *</Label>
+                  <Input placeholder="1500" classNames={uiInputStyles} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
@@ -195,26 +213,26 @@ const AddFacilityPage = () => {
               {/* Capacity */}
               <div>
                 <TextField name="capacity" type="number" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Capacity (Players) *</Label>
-                  <Input placeholder="14" className={inputBaseClass} />
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Capacity (Players) *</Label>
+                  <Input placeholder="14" classNames={uiInputStyles} />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
               </div>
 
               {/* Time Slots */}
               <div className="md:col-span-2 flex flex-col gap-1">
-                <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Available Time Slots *</Label>
-                <div className="flex gap-2 items-center mt-1">
+                <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Available Time Slots *</Label>
+                <div className="flex gap-2 items-center">
                   <Input 
                     value={currentSlot}
                     onChange={(e) => setCurrentSlot(e.target.value)}
                     placeholder="e.g. 08:00 AM - 09:00 AM" 
-                    className={`${inputBaseClass} flex-1 mt-0`}
+                    classNames={uiInputStyles}
                   />
                   <Button 
                     type="button"
                     onClick={handleAddSlot}
-                    className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-11 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md shadow-orange-500/10"
+                    className="bg-gradient-to-r from-orange-500 to-red-600 min-w-12 h-10 rounded-xl text-white flex items-center justify-center hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-md shadow-orange-500/10"
                   >
                     <FiPlus className="text-xl" />
                   </Button>
@@ -243,10 +261,10 @@ const AddFacilityPage = () => {
               {/* Description */}
               <div className="md:col-span-2">
                 <TextField name="description" isRequired className="w-full">
-                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase">Description *</Label>
+                  <Label className="text-sm font-bold text-slate-900 dark:text-slate-200 tracking-wide uppercase mb-1.5 block">Description *</Label>
                   <TextArea
                     placeholder="Describe your facility..."
-                    className={inputBaseClass}
+                    classNames={uiInputStyles}
                   />
                   <FieldError className="text-xs text-red-600 mt-1 font-semibold" />
                 </TextField>
