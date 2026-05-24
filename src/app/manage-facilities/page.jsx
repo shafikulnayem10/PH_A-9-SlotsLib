@@ -54,7 +54,7 @@ export default async function ManageFacilitiesPage() {
     <div className="w-full min-h-screen bg-white dark:bg-slate-955 text-slate-900 dark:text-white transition-colors duration-300">
       <div className="max-w-6xl mx-auto p-6 py-12">
         
-        {/* Top Header Section */}
+        {/* Header Section */}
         <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
@@ -74,7 +74,7 @@ export default async function ManageFacilitiesPage() {
           </Link>
         </div>
 
-        {/* Empty State Card */}
+        {/* Empty State */}
         {facilities.length === 0 ? (
           <Card className="p-12 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50/50 dark:bg-slate-900/30 shadow-none">
             <p className="text-xl font-extrabold text-slate-400 dark:text-slate-600 uppercase tracking-wide">
@@ -85,14 +85,14 @@ export default async function ManageFacilitiesPage() {
             </p>
           </Card>
         ) : (
-          /* Facilities Grid Layout */
+          /* Facilities Grid */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {facilities.map((facility) => (
               <Card
                 key={facility._id}
                 className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-none hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group"
               >
-                {/* Image & Type Badge container */}
+                {/* Image Section */}
                 <div className="relative w-full aspect-[16/10] bg-slate-100 dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800">
                   <Image
                     src={facility.imageUrl || "/slotsliblogo.jpg"}
@@ -100,28 +100,34 @@ export default async function ManageFacilitiesPage() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute top-3 left-3 bg-white dark:bg-slate-900 text-orange-600 dark:text-orange-400 font-black text-[10px] px-3 py-1.5 rounded-xl uppercase shadow-md border border-orange-100 dark:border-orange-950/60">
+                  {/* Tag/Badge */}
+                  <div className="absolute top-3 left-3 bg-white dark:bg-slate-950 text-orange-600 dark:text-orange-400 font-black text-[10px] px-3 py-1.5 rounded-xl uppercase shadow-md border border-orange-100 dark:border-orange-900/60">
                     {facility.facility_type}
                   </div>
                 </div>
 
-                {/* Content Section */}
+                {/* Details Section */}
                 <div className="p-5 flex-1 flex flex-col justify-between gap-4">
                   <div className="space-y-2">
                     <h3 className="text-lg font-black text-slate-900 dark:text-white group-hover:text-orange-500 dark:group-hover:text-orange-500 transition-colors line-clamp-1 uppercase">
                       {facility.facility_name}
                     </h3>
 
-                    {/* Stats Icons Details Grid */}
-                    <div className="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-400 pt-1">
+                    {/* Meta details boxes  */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300 pt-1">
+                      {/* Location Box */}
                       <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 px-2.5 py-1.5 rounded-xl col-span-2">
                         <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                        <span className="truncate">{facility.location}</span>
+                        <span className="truncate text-slate-700 dark:text-slate-300">{facility.location}</span>
                       </div>
+                      
+                      {/* Capacity Box */}
                       <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 px-2.5 py-1.5 rounded-xl">
                         <Users className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                        <span>Cap: {facility.capacity}</span>
+                        <span className="text-slate-700 dark:text-slate-300">Cap: {facility.capacity}</span>
                       </div>
+
+                      {/* Price Box */}
                       <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 px-2.5 py-1.5 rounded-xl">
                         <DollarSign className="w-3.5 h-3.5 text-orange-500 shrink-0" />
                         <span className="text-orange-600 dark:text-orange-400 font-extrabold">
@@ -131,7 +137,7 @@ export default async function ManageFacilitiesPage() {
                     </div>
                   </div>
 
-                  {/* Actions Buttons Grid */}
+                  {/* Actions Buttons */}
                   <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <Link
                       href={`/manage-facilities/edit/${facility._id}`}
