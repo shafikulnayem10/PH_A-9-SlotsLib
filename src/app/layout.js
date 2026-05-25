@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import HeroUIThemeProvider from "@/providers/HeroUIThemeProvider";
+import ChatbotWrapper from "@/components/ChatbotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="grow">{children}</main>
           <Footer />
+          {/* <ChatbotWrapper /> */}
         </HeroUIThemeProvider>
         <Toaster
           position="top-center"
