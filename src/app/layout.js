@@ -7,7 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import HeroUIThemeProvider from "@/providers/HeroUIThemeProvider";
-import ChatbotWrapper from "@/components/ChatbotWrapper";
+// import ChatbotWrapper from "@/components/ChatbotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

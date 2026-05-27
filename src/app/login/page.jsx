@@ -116,7 +116,7 @@ export default function LoginPage() {
             <Label className="text-sm font-extrabold text-slate-700 dark:text-slate-200 mb-1 block">Password</Label>
             <Input 
               type="password"
-              placeholder="..............."
+              placeholder="*********"
               classNames={uiInputStyles}
             />
             <Description className="text-[10px] text-slate-400 dark:text-slate-500 font-medium mt-1">

@@ -157,7 +157,7 @@ export default function RegisterPage() {
             <Label className="text-sm font-extrabold text-slate-700 dark:text-slate-200 mb-1 block">Password</Label>
             <Input 
               type="password"
-              placeholder="..............."
+              placeholder="*********"
               classNames={uiInputStyles}
             />
             <FieldError className="text-red-500 text-xs mt-1 font-semibold" />
