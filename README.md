@@ -1,7 +1,5 @@
 # SlotsLib
 
-
-
 ## Purpose
 
 SlotsLib is a full-stack sports facility booking management platform built with the MERN stack and Better Auth authentication. It allows users to explore available sports venues such as football turfs, badminton courts, cricket grounds, and tennis courts, and make instant bookings for specific dates and time slots. Facility owners can list, manage, update, and delete their own venues through a dedicated dashboard.
@@ -9,7 +7,6 @@ SlotsLib is a full-stack sports facility booking management platform built with 
 ## Live URL
 
 [https://ph-a-9-slots-lib.vercel.app](https://ph-a-9-slots-lib.vercel.app)
-
 
 ---
 
@@ -19,16 +16,16 @@ Optimized the application's load performance using dynamic imports and server-si
 
 | Metric | Before | After |
 |---|---|---|
-| Lighthouse Performance Score | 55 | **97** |
-| Largest Contentful Paint (LCP) | 2.614s | **1.68s** |
-| First Contentful Paint (FCP) | 2.412s | **1.607s** |
-| Total Page Load Time | 4.234s | **3.72s** |
-| Total Blocking Time (TBT) | 0.003s | **0s** |
+| PageSpeed Insights Score (Desktop) | 55 | **98** |
+| PageSpeed Insights Score (Mobile) | 55 | **99** |
+| Largest Contentful Paint (LCP) | 2.614s | **0.6s** |
+| First Contentful Paint (FCP) | 2.412s | **0.3s** |
+| Total Blocking Time (TBT) | 0.003s | **0ms** |
 | Render-blocking Requests | 3 | **2** |
 
 **What was done:**
 - Eliminated render-blocking Swiper.js from the initial bundle using `next/dynamic` with `ssr: false`, reducing JS parsed on page load
-- Replaced `cache: "no-store"` with `next: { revalidate: 60 }` for featured facilities API — reduces redundant DB calls by serving cached responses for 60 seconds
+- Replaced `cache: "no-store"` with `next: { revalidate: 60 }` across all API fetches — reduces redundant DB calls by serving cached responses for 60 seconds
 - Lazy loading already implemented on all non-hero images via Next.js `Image` component
 
 ---
@@ -106,11 +103,11 @@ npm install
 
 Create a `.env.local` file in the root directory:
 ```env
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000/api
-MONGODB_URI=your_mongodb_connection_string
-BETTER_AUTH_SECRET=your_secret_key
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXT_PUBLIC_SERVER_URL
+MONGODB_URI
+BETTER_AUTH_SECRET
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
 ```
 
 4. **Run the development server**
@@ -121,5 +118,3 @@ npm run dev
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
-
-
