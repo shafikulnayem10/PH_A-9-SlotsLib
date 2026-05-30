@@ -1,5 +1,7 @@
 # SlotsLib
 
+
+
 ## Purpose
 
 SlotsLib is a full-stack sports facility booking management platform built with the MERN stack and Better Auth authentication. It allows users to explore available sports venues such as football turfs, badminton courts, cricket grounds, and tennis courts, and make instant bookings for specific dates and time slots. Facility owners can list, manage, update, and delete their own venues through a dedicated dashboard.
@@ -7,6 +9,38 @@ SlotsLib is a full-stack sports facility booking management platform built with 
 ## Live URL
 
 [https://ph-a-9-slots-lib.vercel.app](https://ph-a-9-slots-lib.vercel.app)
+
+
+---
+
+## Performance
+
+Optimized the application's load performance using dynamic imports and server-side caching:
+
+| Metric | Before | After |
+|---|---|---|
+| Lighthouse Performance Score | 55 | **97** |
+| Largest Contentful Paint (LCP) | 2.614s | **1.68s** |
+| First Contentful Paint (FCP) | 2.412s | **1.607s** |
+| Total Page Load Time | 4.234s | **3.72s** |
+| Total Blocking Time (TBT) | 0.003s | **0s** |
+| Render-blocking Requests | 3 | **2** |
+
+**What was done:**
+- Eliminated render-blocking Swiper.js from the initial bundle using `next/dynamic` with `ssr: false`, reducing JS parsed on page load
+- Replaced `cache: "no-store"` with `next: { revalidate: 60 }` for featured facilities API — reduces redundant DB calls by serving cached responses for 60 seconds
+- Lazy loading already implemented on all non-hero images via Next.js `Image` component
+
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, Tailwind CSS, HeroUI
+- **Backend:** Next.js API Routes, MongoDB
+- **Auth:** Better Auth (Email/Password + Google OAuth)
+- **Deployment:** Vercel
+
+---
 
 ## Features
 
@@ -25,9 +59,9 @@ SlotsLib is a full-stack sports facility booking management platform built with 
 - Toast notifications for all success and error feedback
 - Active route highlighting in the navbar
 
-## NPM Packages Used
+---
 
-### Dependencies
+## Main Dependencies
 
 | Package | Purpose |
 |---|---|
@@ -38,21 +72,54 @@ SlotsLib is a full-stack sports facility booking management platform built with 
 | `@better-auth/mongo-adapter` | MongoDB adapter for Better Auth |
 | `mongodb` | MongoDB driver for database operations |
 | `@heroui/react` | UI component library (forms, cards, modals, buttons) |
-| `@heroui/styles` | Styling utilities for HeroUI |
 | `tailwindcss` | Utility-first CSS framework |
 | `lucide-react` | Icon library |
-| `react-icons` | Additional icon sets |
 | `react-hot-toast` | Toast notifications |
 | `jose-cjs` | JWT verification using JWKS for API protection |
 | `react-fast-marquee` | Scrolling marquee component |
 | `swiper` | Slider/carousel component |
-| `@gravity-ui/components` | Additional UI components |
 
-### Dev Dependencies
+---
 
-| Package | Purpose |
-|---|---|
-| `eslint` | Code linting |
-| `eslint-config-next` | ESLint configuration for Next.js |
-| `@tailwindcss/postcss` | PostCSS plugin for Tailwind CSS |
-| `babel-plugin-react-compiler` | React compiler Babel plugin |
+## How to Run Locally
+
+### Prerequisites
+
+- Node.js v18+
+- MongoDB connection string
+- Google OAuth credentials (for Google login)
+
+### Steps
+
+1. **Clone the repository**
+```bash
+git clone url
+cd slotslib
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+
+Create a `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000/api
+MONGODB_URI=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+4. **Run the development server**
+```bash
+npm run dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+
