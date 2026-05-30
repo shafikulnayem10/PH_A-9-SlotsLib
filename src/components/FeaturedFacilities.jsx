@@ -6,8 +6,9 @@ import { FacilityCard } from "./FacilityCard"
 
 async function getFeaturedFacilities() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured-facilities`, {
-      cache: "no-store",
+   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured-facilities`, {
+  next: { revalidate: 60 } 
+})
     })
     if (!res.ok) throw new Error("Failed to fetch data from server")
     return res.json()

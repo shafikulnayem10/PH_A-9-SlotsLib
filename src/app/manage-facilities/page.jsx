@@ -131,7 +131,7 @@ export default async function ManageFacilitiesPage() {
                       <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 px-2.5 py-1.5 rounded-xl">
                         <DollarSign className="w-3.5 h-3.5 text-orange-500 shrink-0" />
                         <span className="text-orange-600 dark:text-orange-400 font-extrabold">
-                          ৳{facility.price_per_hour}/h
+                          ${facility.price_per_hour}/h
                         </span>
                       </div>
                     </div>
