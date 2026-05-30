@@ -11,7 +11,7 @@ async function getMyFacilities(ownerEmail, token) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities?email=${ownerEmail}`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
         headers: {
           authorization: `Bearer ${token}`,
         },

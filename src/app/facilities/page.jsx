@@ -21,7 +21,7 @@ async function getFacilities(search, sport) {
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/facilities?${params.toString()}`,
-      { cache: "no-store" }
+      {next: { revalidate: 60 }}
     );
     if (!res.ok) throw new Error("Failed to fetch");
     return await res.json();

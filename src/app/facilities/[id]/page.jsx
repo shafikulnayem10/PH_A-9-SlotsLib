@@ -7,7 +7,7 @@ import { auth } from "@/lib/auth";
 async function getSingleFacility(id, token) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
-      cache: "no-store",
+     next: { revalidate: 60 },
       headers: {
         authorization: `Bearer ${token}`,
       },
